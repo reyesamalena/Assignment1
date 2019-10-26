@@ -11,6 +11,8 @@
 
 //1% of a million
 #define N 10000
+//million
+#define M 1000000
    
 
 //Create template to space out table elements
@@ -26,8 +28,12 @@ int main()
 {
     
     //GENERATING ARRAY
-    unsigned long long int twentydigit_start = 10000000000000000000;
-    int testarray[N] = {0};
+    long long int twentydigit_start = 10000000000000000000;
+    long long int million_start = 1;
+    long long int one_percent_start = 0;
+    int array_one[M] = {0};//Sets where no numbers repeat
+    int array_two[N] = {0};//Sets where the range of numbers is 1% of the array size
+    int array_three[N] = {0};//Sets where no numbers repeat and each integer has 20 digits
     int randomposition;
     
     //Arrays to keep test results
@@ -40,23 +46,36 @@ int main()
         
 	int trial_num = j+1;	//keep track of trial number w/o messing with counter
 
-	cout << "\033[1;31m";
-        cout  << "Trial " << trial_num <<": "<< endl;
+        cout << "\033[1;31m";       //printing color
+        cout  << "Trial " << trial_num <<": "<< endl;       //trial number
         cout << "\033[0m";
         
-        for( long long int i = twentydigit_start; i< twentydigit_start+N; i++){
+        for(int k = 0; k < (million_start+M); k++){ //for array one
+            array_one[k-million_start] = k;
+            
+        }
         
-            testarray[i-twentydigit_start] = i;
+        random_shuffle(std::begin(array_one), std::end(array_one)); //randomly shuffling the array one
+
+        
+        for( unsigned long long int n = one_percent_start; n< (one_percent_start+N); n++){ //for array two
+            array_two[n-one_percent_start] = n;
+            array_two[ (n-one_percent_start) +1] = n;
+            n++;
 
         }
-        random_shuffle(testarray, testarray +N); //randomly shuffling the array
+        random_shuffle(std::begin(array_two), std::end(array_two)); //randomly shuffling the array
+
+        for( unsigned long long int i = twentydigit_start; i< twentydigit_start+N; i++){ //for array three
+        
+            array_three[i-twentydigit_start] = i;
+        }
+        random_shuffle(array_three, array_three +N); //randomly shuffling the array
         
 	//QUICK SORT
-         int arr[] = {10, 7, 8, 9, 1, 5};
-         int n = sizeof(arr) / sizeof(arr[0]);
-         
+     
          auto quick_start = high_resolution_clock::now();
-         quickSort(testarray, 0, N - 1);
+         quickSort(array_three, 0, N - 1);
          auto quick_stop = high_resolution_clock::now();
          auto quick_duration = duration_cast<microseconds>(quick_stop - quick_start);
          
@@ -64,14 +83,12 @@ int main()
          //printArray(arr, n);
          cout << "Time: " << quick_duration.count() << " microsecond " << endl;
          cout << endl;
-	 quick_Sort[j]=quick_duration.count();
+        quick_Sort[j]=quick_duration.count();
          
-         //OPTIMIZED QUICK SORT
-         int OQuickarr[] = {10, 7, 8, 9, 1, 5};
-         int oqn = sizeof(OQuickarr)/sizeof(OQuickarr[0]);
-         
+    //OPTIMIZED QUICK SORT
+
          auto o_quick_start = high_resolution_clock::now();
-         optimizedQuickSort(testarray, 0, N-1);
+         optimizedQuickSort(array_three, 0, N-1);
          auto o_quick_stop = high_resolution_clock::now();
          auto o_quick_duration = duration_cast<microseconds>(o_quick_stop - o_quick_start);
         
@@ -81,12 +98,11 @@ int main()
          cout << endl;
          opt_Quick_Sort[j]= o_quick_duration.count();
 
-         //RADIX SORT
-         int Radixarr[] = {170, 45, 75, 90, 802, 24, 2, 66};
-         int Rn = sizeof(Radixarr)/sizeof(Radixarr[0]);
+    //RADIX SORT
+
          
          auto radix_start = high_resolution_clock::now();
-         radixsort(testarray, N);
+         radixsort(array_three, N);
          auto radix_stop = high_resolution_clock::now();
          auto radix_duration = duration_cast<microseconds>(radix_stop - radix_start);
          
@@ -96,13 +112,13 @@ int main()
          cout << endl;
          radix_Sort[j] = radix_duration.count();
 
-         //TIM SORT
-         int Timarr[] = {5, 21, 7, 23, 19};
+    //TIM SORT
+    /*     int Timarr[] = {5, 21, 7, 23, 19};
          int Tn = sizeof(Timarr)/sizeof(Timarr[0]);
          
          auto tim_start = high_resolution_clock::now();
-         //timSort(testarray, N);
-        int r = 0, nn=N;           /* станет 1 если среди сдвинутых битов будет хотя бы 1 ненулевой */
+         //timSort(array_one, N);
+        int r = 0, nn=N;
          while (nn >= 64) {
              r |= nn & 1;
              nn >>= 1;
@@ -118,7 +134,9 @@ int main()
          cout << endl;
          tim_Sort[j] = tim_duration.count();
         
-        
+       */
+        million_start = million_start + M;
+        one_percent_start = one_percent_start + N;
         twentydigit_start = twentydigit_start + N;
     }
 
@@ -154,7 +172,9 @@ int main()
     //Print 4th row for TimSort
     printElement("TimSort", nameWidth);
     for(x=0;x<10;x++) {
-	    printElement(tim_Sort[x], numWidth); }
+	   // printElement(tim_Sort[x], numWidth);
+        
+    }
     cout << endl;
     
     return 0;  
