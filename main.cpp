@@ -29,7 +29,7 @@ int main()
     
     //GENERATING ARRAY
     long long int twentydigit_start = 10000000000000000000;
-    long long int million_start = 1;
+    long long int million_start = 0;
     long long int one_percent_start = 0;
     int array_one[M] = {0};//Sets where no numbers repeat
     int array_two[N] = {0};//Sets where the range of numbers is 1% of the array size
@@ -62,16 +62,18 @@ int main()
         cout  << "Trial " << j <<": "<< endl;       //trial number
         cout << "\033[0m";
         
-cout << j << endl;
-        for(int k = 0; k < (million_start+M); k++){ //for array one
-            array_one[k-million_start] = k;
-            
-        } 
-cout << j << endl;
-        random_shuffle(std::begin(array_one), std::end(array_one)); //randomly shuffling the array one
 
+       
         
-cout << j << endl;
+        for(unsigned long long int k = million_start; k < (million_start+M); k++){ //for array one
+                // cout << k - (million_start) << ",";
+                  array_one[k-million_start] = k;
+
+              }
+             cout << endl;
+              random_shuffle(std::begin(array_one), std::end(array_one)); //randomly shuffling the array one
+        
+        
         for( unsigned long long int n = one_percent_start; n< (one_percent_start+N); n++){ //for array two
             array_two[n-one_percent_start] = n;
             array_two[ (n-one_percent_start) +1] = n;
