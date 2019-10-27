@@ -1,13 +1,14 @@
 #include <iostream> 
 #include <queue> 
+#include "redblack.h"
 using namespace std; 
 
 enum COLOR { RED, BLACK }; 
-
+/*
 class RBNode { 
-	public: 
-		int val; 
-	COLOR color; 
+public: 
+int val; 
+COLOR color; 
 RBNode *left, *right, *parent; 
 
 RBNode(int val) : val(val) { 
@@ -17,7 +18,7 @@ RBNode(int val) : val(val) {
 	// Node is red at insertion 
 	color = RED; 
 } 
-
+*/
 // returns pointer to uncle 
 RBNode *uncle() { 
 	// If no parent or grandparent, then no uncle 
@@ -266,7 +267,7 @@ void deleteRBNode(RBNode *v) {
 
 	// v has 2 children, swap values with successor and recurse 
 	swapValues(u, v); 
-	deleteRBNode(u); 
+	deleteNode(u); 
 } 
 
 void fixDoubleBlack(RBNode *x) { 
@@ -405,7 +406,7 @@ RBNode *search(int n) {
 
 // inserts the given value to tree 
 void insert(int n) { 
-	RBNode *newNode = new RBNode(n); 
+	RBNode *newNode = new Node(n); 
 	if (root == NULL) { 
 	// when root is null 
 	// simply insert value at root 
@@ -448,7 +449,7 @@ void deleteByVal(int n) {
 	return; 
 	} 
 
-	deleteRBNode(v); 
+	deleteNode(v); 
 } 
 
 // prints inorder of the tree 
@@ -471,7 +472,7 @@ void printLevelOrder() {
 	cout << endl; 
 } 
 }; 
-
+/*
 int main() { 
 RBTree tree; 
 
@@ -502,3 +503,4 @@ tree.printInOrder();
 tree.printLevelOrder(); 
 return 0; 
 } 
+*/
