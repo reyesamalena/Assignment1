@@ -11,6 +11,8 @@ public:
   	COLOR color;
   	RBNode *left, *right, *parent;
 
+
+
   	RBNode(int val) : val(val) {
     		parent = left = right = NULL; 
   
@@ -112,6 +114,12 @@ public:
 	// prints level order of the tree
 	void printLevelOrder();
 };
+
+
+/* Compute the "maxDepth" of a tree -- the number of  
+nodes along the longest path from the root node  
+down to the farthest leaf node.*/
+int maxDepth(RBNode* node);  
 
 #endif
 
