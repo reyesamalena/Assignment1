@@ -56,11 +56,11 @@ int main()
 
     for( int j= 0; j<10; j++){
         
-//	int trial_num = j+1;	//keep track of trial number w/o messing with counter
+	int trial_num = j+1;	//keep track of trial number w/o messing with counter
 
-        cout << "\033[1;31m";       //printing color
-        cout  << "Trial " << j <<": "<< endl;       //trial number
-        cout << "\033[0m";
+        cout << "\033[1;33m";       //printing color
+        cout  << "Performing Trial " << trial_num <<" ..."<< endl;       //trial number
+        //cout << "\033[0m";
         
 
        
@@ -95,36 +95,36 @@ int main()
          auto quick_start1 = high_resolution_clock::now();
          quickSort(array_one, 0, N - 1);
          auto quick_stop1 = high_resolution_clock::now();
-         auto quick_duration1 = duration_cast<microseconds>(quick_stop1 - quick_start1);
+         auto quick_duration1 = duration_cast<nanoseconds>(quick_stop1 - quick_start1);
          
-         cout << "Quicksort Sorted Array: \n";
+         //cout << "Quicksort Sorted Array: \n";
          //printArray(arr, n);
-         cout << "Array 1 Time: " << quick_duration1.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 1 Time: " << quick_duration1.count() << " nanoseconds " << endl;
+         //cout << endl;
          quick_Sort1[j]=quick_duration1.count();
          
 	 //Array 2
          auto quick_start2 = high_resolution_clock::now();
          quickSort(array_two, 0, N - 1);
          auto quick_stop2 = high_resolution_clock::now();
-         auto quick_duration2 = duration_cast<microseconds>(quick_stop2 - quick_start2);
+         auto quick_duration2 = duration_cast<nanoseconds>(quick_stop2 - quick_start2);
          
-         cout << "Quicksort Sorted Array: \n";
+         //cout << "Quicksort Sorted Array: \n";
          //printArray(arr, n);
-         cout << "Array 2 Time: " << quick_duration2.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 2 Time: " << quick_duration2.count() << " nanoseconds " << endl;
+         //cout << endl;
          quick_Sort2[j]=quick_duration2.count();
 
 	 //Array 3
          auto quick_start3 = high_resolution_clock::now();
          quickSort(array_three, 0, N - 1);
          auto quick_stop3 = high_resolution_clock::now();
-         auto quick_duration3 = duration_cast<microseconds>(quick_stop3 - quick_start3);
+         auto quick_duration3 = duration_cast<nanoseconds>(quick_stop3 - quick_start3);
          
-         cout << "Quicksort Sorted Array: \n";
+         //cout << "Quicksort Sorted Array: \n";
          //printArray(arr, n);
-         cout << "Array 3 Time: " << quick_duration3.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 3 Time: " << quick_duration3.count() << " nanoseconds " << endl;
+         //cout << endl;
          quick_Sort3[j]=quick_duration3.count();
 
 
@@ -134,36 +134,36 @@ int main()
          auto o_quick_start1 = high_resolution_clock::now();
          optimizedQuickSort(array_one, 0, N-1);
          auto o_quick_stop1 = high_resolution_clock::now();
-         auto o_quick_duration1 = duration_cast<microseconds>(o_quick_stop1 - o_quick_start1);
+         auto o_quick_duration1 = duration_cast<nanoseconds>(o_quick_stop1 - o_quick_start1);
         
-         printf("Optimized Quick Sorted Array: \n");
+         //printf("Optimized Quick Sorted Array: \n");
          //printOQarray(OQuickarr, oqn);
-         cout << "Array 1 Time: " << o_quick_duration1.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 1 Time: " << o_quick_duration1.count() << " nanoseconds " << endl;
+         //cout << endl;
          opt_Quick_Sort1[j]= o_quick_duration1.count();
 
 	 //Array 2
          auto o_quick_start2 = high_resolution_clock::now();
          optimizedQuickSort(array_two, 0, N-1);
          auto o_quick_stop2 = high_resolution_clock::now();
-         auto o_quick_duration2 = duration_cast<microseconds>(o_quick_stop2 - o_quick_start2);
+         auto o_quick_duration2 = duration_cast<nanoseconds>(o_quick_stop2 - o_quick_start2);
         
-         printf("Optimized Quick Sorted Array: \n");
+         //printf("Optimized Quick Sorted Array: \n");
          //printOQarray(OQuickarr, oqn);
-         cout << "Array 2 Time: " << o_quick_duration2.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 2 Time: " << o_quick_duration2.count() << " nanoseconds " << endl;
+         //cout << endl;
          opt_Quick_Sort2[j]= o_quick_duration2.count();
 
 	 //Array 3
          auto o_quick_start3 = high_resolution_clock::now();
          optimizedQuickSort(array_three, 0, N-1);
          auto o_quick_stop3 = high_resolution_clock::now();
-         auto o_quick_duration3 = duration_cast<microseconds>(o_quick_stop3 - o_quick_start3);
+         auto o_quick_duration3 = duration_cast<nanoseconds>(o_quick_stop3 - o_quick_start3);
         
-         printf("Optimized Quick Sorted Array: \n");
+         //printf("Optimized Quick Sorted Array: \n");
          //printOQarray(OQuickarr, oqn);
-         cout << "Array 3 Time: " << o_quick_duration3.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 3 Time: " << o_quick_duration3.count() << " nanoseconds " << endl;
+         //cout << endl;
          opt_Quick_Sort3[j]= o_quick_duration3.count();
 
     //RADIX SORT
@@ -172,61 +172,80 @@ int main()
          auto radix_start1 = high_resolution_clock::now();
          radixsort(array_one, N);
          auto radix_stop1 = high_resolution_clock::now();
-         auto radix_duration1 = duration_cast<microseconds>(radix_stop1 - radix_start1);
+         auto radix_duration1 = duration_cast<nanoseconds>(radix_stop1 - radix_start1);
          
-         cout << "Radixsort Sorted Array: \n";
+         //cout << "Radixsort Sorted Array: \n";
          //print(Radixarr, Rn);
-         cout << "Array 1 Time: " << radix_duration1.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 1 Time: " << radix_duration1.count() << " nanoseconds " << endl;
+         //cout << endl;
          radix_Sort1[j] = radix_duration1.count();
 
          //Array 2 
          auto radix_start2 = high_resolution_clock::now();
          radixsort(array_two, N);
          auto radix_stop2 = high_resolution_clock::now();
-         auto radix_duration2 = duration_cast<microseconds>(radix_stop2 - radix_start2);
+         auto radix_duration2 = duration_cast<nanoseconds>(radix_stop2 - radix_start2);
          
-         cout << "Radixsort Sorted Array: \n";
+         //cout << "Radixsort Sorted Array: \n";
          //print(Radixarr, Rn);
-         cout << "Array 2 Time: " << radix_duration2.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 2 Time: " << radix_duration2.count() << " nanoseconds " << endl;
+         //cout << endl;
          radix_Sort2[j] = radix_duration2.count();
 
          //Array 3 
          auto radix_start3 = high_resolution_clock::now();
          radixsort(array_three, N);
          auto radix_stop3 = high_resolution_clock::now();
-         auto radix_duration3 = duration_cast<microseconds>(radix_stop3 - radix_start3);
+         auto radix_duration3 = duration_cast<nanoseconds>(radix_stop3 - radix_start3);
          
-         cout << "Radixsort Sorted Array: \n";
+         //cout << "Radixsort Sorted Array: \n";
          //print(Radixarr, Rn);
-         cout << "Array 3 Time: " << radix_duration3.count() << " microsecond " << endl;
-         cout << endl;
+         //cout << "Array 3 Time: " << radix_duration3.count() << " nanoseconds " << endl;
+         //cout << endl;
          radix_Sort3[j] = radix_duration3.count();
 
     //TIM SORT
-    /*     int Timarr[] = {5, 21, 7, 23, 19};
-         int Tn = sizeof(Timarr)/sizeof(Timarr[0]);
+         //Array 1
+         int Tn = sizeof(array_one)/sizeof(array_one[0]);
          
          auto tim_start = high_resolution_clock::now();
-         //timSort(array_one, N);
-        int r = 0, nn=N;
-         while (nn >= 64) {
-             r |= nn & 1;
-             nn >>= 1;
-         }
-         cout<< nn + r<<endl;
-
+         timSort(array_one, Tn);
          auto tim_stop = high_resolution_clock::now();
-         auto tim_duration = duration_cast<microseconds>(tim_stop - tim_start);
-         
-         printf("Tim Sorted Array: \n");
+         auto tim_duration = duration_cast<nanoseconds>(tim_stop - tim_start);
+         tim_Sort1[j] = tim_duration.count();
+         //printf("Tim Sorted Array: \n");
          //print_TArray(Timarr, Tn);
-         cout << "Time: " << tim_duration.count() << " microsecond " << endl;
-         cout << endl;
-         tim_Sort[j] = tim_duration.count();
+         //cout << "Time: " << tim_duration.count() << " nanoseconds " << endl;
         
-       */
+         //Array 2
+         int Tn_two = sizeof(array_two)/sizeof(array_two[0]);
+         
+         auto tim_start2 = high_resolution_clock::now();
+         timSort(array_two, Tn_two);
+         auto tim_stop2 = high_resolution_clock::now();
+         auto tim_duration2 = duration_cast<nanoseconds>(tim_stop2 - tim_start2);
+         
+         tim_Sort2[j] = tim_duration2.count();
+         //printf("Tim Sorted Array: \n");
+         //print_TArray(Timarr, Tn);
+         //cout << "Time: " << tim_duration2.count() << " nanoseconds " << endl;
+
+         //tim_Sort[j] = tim_duration.count();
+        
+         //Array 3
+         int Tn_three = sizeof(array_three)/sizeof(array_three[0]);
+         
+         auto tim_start3 = high_resolution_clock::now();
+         timSort(array_three, Tn_three);
+         auto tim_stop3 = high_resolution_clock::now();
+         auto tim_duration3 = duration_cast<nanoseconds>(tim_stop3 - tim_start3);
+         tim_Sort3[j] = tim_duration3.count();
+         
+         //printf("Tim Sorted Array: \n");
+         //print_TArray(Timarr, Tn);
+         //cout << "Time: " << tim_duration3.count() << " nanoseconds " << endl;
+        
+       
         million_start = million_start + M;
         one_percent_start = one_percent_start + N;
         twentydigit_start = twentydigit_start + N;
@@ -239,7 +258,9 @@ int main()
    
 
 //Array 1
-    cout << "\t\t\t\tArray 1" << endl;
+    cout << "\033[1;36m";       //printing color
+    cout << "ARRAY 1" << endl;
+    cout << "\033[0m";
     //Print out column names
     printElement("Algorithms", nameWidth);
     for(x=1;x<=10;x++) {
@@ -267,13 +288,15 @@ int main()
     //Print 4th row for TimSort
     printElement("TimSort", nameWidth);
     for(x=0;x<10;x++) {
-	   // printElement(tim_Sort1[x], numWidth);
+	    printElement(tim_Sort1[x], numWidth);
         
     }
     cout << endl << endl;
    
 //Array 2
-    cout << "\t\t\t\tArray 2" << endl;
+    cout << "\033[1;34m";       //printing color
+    cout << "ARRAY 2" << endl;
+    cout << "\033[0m";
     //Print out column names
     printElement("Algorithms", nameWidth);
     for(x=1;x<=10;x++) {
@@ -301,13 +324,15 @@ int main()
     //Print 4th row for TimSort
     printElement("TimSort", nameWidth);
     for(x=0;x<10;x++) {
-	   // printElement(tim_Sort2[x], numWidth);
+	    printElement(tim_Sort2[x], numWidth);
         
     }
     cout << endl << endl;
 
 //Array 3
-    cout << "\t\t\t\tArray 3" << endl;
+    cout << "\033[1;35m";       //printing color
+    cout << "ARRAY 3" << endl;
+    cout << "\033[0m";
     //Print out column names
     printElement("Algorithms", nameWidth);
     for(x=1;x<=10;x++) {
@@ -335,7 +360,7 @@ int main()
     //Print 4th row for TimSort
     printElement("TimSort", nameWidth);
     for(x=0;x<10;x++) {
-	   // printElement(tim_Sort3[x], numWidth);
+	    printElement(tim_Sort3[x], numWidth);
         
     }
     cout << endl;

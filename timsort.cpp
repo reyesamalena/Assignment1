@@ -23,11 +23,16 @@ void tinsertionSort(int arr[], int left, int right)
 // merge function merges the sorted runs 
 void tmerge(int arr[], int l, int m, int r)
 {
- 
+    cout << "here" << endl;
+     cout <<"m-l+1:" <<  m-l+1 <<endl;
     // original array is broken in two parts 
     // left and right array 
-    int len1 = m - l + 1, len2 = r - m;
-    int left[len1], right[len2];
+    int len1 = m - l + 1;
+
+
+    int len2 = r - m;
+    unsigned long int left[len1], right[len2];
+    cout <<"****************" << endl;
     for (int i = 0; i < len1; i++) {
 
         left[i] = arr[l + i];

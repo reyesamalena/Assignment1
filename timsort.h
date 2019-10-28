@@ -1,7 +1,7 @@
 #ifndef timsort_H
 #define timsort_H
 #include <iostream>
-const int RUN = 40;
+const int RUN = 1000000;
 
 using namespace std;
 
