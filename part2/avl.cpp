@@ -15,11 +15,11 @@ class Node
     int height; 
 }; 
 */
-
+/*
 // A utility function to get maximum 
 // of two integers 
 int max(int a, int b);
-
+*/
 // A utility function to get height 
 // of the tree 
 int height(Node *N)

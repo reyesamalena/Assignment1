@@ -1,54 +1,12 @@
 #include <iostream> 
 #include <queue> 
+#include "redblack.h"
+
 using namespace std; 
 
-enum COLOR { RED, BLACK }; 
-
-class RBNode { 
-public: 
-int val; 
-COLOR color; 
-RBNode *left, *right, *parent; 
-
-RBNode(int val) : val(val) { 
-	parent = left = right = NULL; 
-
-	// Node is created during insertion 
-	// Node is red at insertion 
-	color = RED; 
-} 
-
-// returns pointer to uncle 
-RBNode *uncle() { 
-	// If no parent or grandparent, then no uncle 
-	if (parent == NULL or parent->parent == NULL) 
-	return NULL; 
-
-	if (parent->isOnLeft()) 
-	// uncle on right 
-	return parent->parent->right; 
-	else
-	// uncle on left 
-	return parent->parent->left; 
-} 
-
-// check if node is left child of parent 
-bool isOnLeft() { return this == parent->left; } 
-
-// returns pointer to sibling 
-RBNode *sibling() { 
-	// sibling null if no parent 
-	if (parent == NULL) 
-	return NULL; 
-
-	if (isOnLeft()) 
-	return parent->right; 
-
-	return parent->left; 
-} 
 
 // moves node down and moves given node in its place 
-void moveDown(RBNode *nParent) { 
+void RBNode::moveDown(RBNode *nParent) { 
 	if (parent != NULL) { 
 	if (isOnLeft()) { 
 		parent->left = nParent; 
@@ -60,17 +18,14 @@ void moveDown(RBNode *nParent) {
 	parent = nParent; 
 } 
 
-bool hasRedChild() { 
+bool RBNode::hasRedChild() { 
 	return (left != NULL and left->color == RED) or 
 		(right != NULL and right->color == RED); 
-} 
-}; 
-
-class RBTree { 
-RBNode *root; 
+}  
+ 
 
 // left rotates the given node 
-void leftRotate(RBNode *x) { 
+void RBTree::leftRotate(RBNode *x) { 
 	// new parent will be node's right child 
 	RBNode *nParent = x->right; 
 
@@ -91,7 +46,7 @@ void leftRotate(RBNode *x) {
 	nParent->left = x; 
 } 
 
-void rightRotate(RBNode *x) { 
+void RBTree::rightRotate(RBNode *x) { 
 	// new parent will be node's left child 
 	RBNode *nParent = x->left; 
 
@@ -112,14 +67,14 @@ void rightRotate(RBNode *x) {
 	nParent->right = x; 
 } 
 
-void swapColors(RBNode *x1, RBNode *x2) { 
+void RBTree::swapColors(RBNode *x1, RBNode *x2) { 
 	COLOR temp; 
 	temp = x1->color; 
 	x1->color = x2->color; 
 	x2->color = temp; 
 } 
 
-void swapValues(RBNode *u, RBNode *v) { 
+void RBTree::swapValues(RBNode *u, RBNode *v) { 
 	int temp; 
 	temp = u->val; 
 	u->val = v->val; 
@@ -127,7 +82,7 @@ void swapValues(RBNode *u, RBNode *v) {
 } 
 
 // fix red red at given node 
-void fixRedRed(RBNode *x) { 
+void RBTree::fixRedRed(RBNode *x) { 
 	// if x is root color it black and return 
 	if (x == root) { 
 	x->color = BLACK; 
@@ -175,7 +130,7 @@ void fixRedRed(RBNode *x) {
 
 // find node that do not have a left child 
 // in the subtree of the given node 
-RBNode *successor(RBNode *x) { 
+RBNode* RBTree::successor(RBNode *x) { 
 	RBNode *temp = x; 
 
 	while (temp->left != NULL) 
@@ -185,7 +140,7 @@ RBNode *successor(RBNode *x) {
 } 
 
 // find node that replaces a deleted node in BST 
-RBNode *BSTreplace(RBNode *x) { 
+RBNode* RBTree::BSTreplace(RBNode *x) { 
 	// when node have 2 children 
 	if (x->left != NULL and x->right != NULL) 
 	return successor(x->right); 
@@ -202,7 +157,7 @@ RBNode *BSTreplace(RBNode *x) {
 } 
 
 // deletes the given node 
-void deleteRBNode(RBNode *v) { 
+void RBTree::deleteRBNode(RBNode *v) { 
 	RBNode *u = BSTreplace(v); 
 
 	// True when u and v are both black 
@@ -269,7 +224,7 @@ void deleteRBNode(RBNode *v) {
 	deleteRBNode(u); 
 } 
 
-void fixDoubleBlack(RBNode *x) { 
+void RBTree::fixDoubleBlack(RBNode *x) { 
 	if (x == root) 
 	// Reached root 
 	return; 
@@ -334,7 +289,7 @@ void fixDoubleBlack(RBNode *x) {
 } 
 
 // prints level order for given node 
-void levelOrder(RBNode *x) { 
+void RBTree::levelOrder(RBNode *x) { 
 	if (x == NULL) 
 	// return if node is null 
 	return; 
@@ -364,7 +319,7 @@ void levelOrder(RBNode *x) {
 } 
 
 // prints inorder recursively 
-void inorder(RBNode *x) { 
+void RBTree::inorder(RBNode *x) { 
 	if (x == NULL) 
 	return; 
 	inorder(x->left); 
@@ -372,17 +327,11 @@ void inorder(RBNode *x) {
 	inorder(x->right); 
 } 
 
-public: 
-// constructor 
-// initialize root 
-RBTree() { root = NULL; } 
-
-RBNode *getRoot() { return root; } 
 
 // searches for given value 
 // if found returns the node (used for delete) 
 // else returns the last node while traversing (used in insert) 
-RBNode *search(int n) { 
+RBNode* RBTree::search(int n) { 
 	RBNode *temp = root; 
 	while (temp != NULL) { 
 	if (n < temp->val) { 
@@ -404,7 +353,7 @@ RBNode *search(int n) {
 } 
 
 // inserts the given value to tree 
-void insert(int n) { 
+void RBTree::insert(int n) { 
 	RBNode *newNode = new RBNode(n); 
 	if (root == NULL) { 
 	// when root is null 
@@ -436,7 +385,7 @@ void insert(int n) {
 } 
 
 // utility function that deletes the node with given value 
-void deleteByVal(int n) { 
+void RBTree::deleteByVal(int n) { 
 	if (root == NULL) 
 	// Tree is empty 
 	return; 
@@ -452,7 +401,7 @@ void deleteByVal(int n) {
 } 
 
 // prints inorder of the tree 
-void printInOrder() { 
+void RBTree::printInOrder() { 
 	cout << "Inorder: " << endl; 
 	if (root == NULL) 
 	cout << "Tree is empty" << endl; 
@@ -462,7 +411,7 @@ void printInOrder() {
 } 
 
 // prints level order of the tree 
-void printLevelOrder() { 
+void RBTree::printLevelOrder() { 
 	cout << "Level order: " << endl; 
 	if (root == NULL) 
 	cout << "Tree is empty" << endl; 
@@ -470,36 +419,5 @@ void printLevelOrder() {
 	levelOrder(root); 
 	cout << endl; 
 } 
-}; 
 
-
-int main() { 
-RBTree tree; 
-
-tree.insert(7); 
-tree.insert(3); 
-tree.insert(18); 
-tree.insert(10); 
-tree.insert(22); 
-tree.insert(8); 
-tree.insert(11); 
-tree.insert(26); 
-tree.insert(2); 
-tree.insert(6); 
-tree.insert(13); 
-
-tree.printInOrder(); 
-tree.printLevelOrder(); 
-
-cout<<endl<<"Deleting 18, 11, 3, 10, 22"<<endl; 
-
-tree.deleteByVal(18); 
-tree.deleteByVal(11); 
-tree.deleteByVal(3); 
-tree.deleteByVal(10); 
-tree.deleteByVal(22); 
-
-tree.printInOrder(); 
-tree.printLevelOrder(); 
-return 0; 
-} 
+/* https://www.geeksforgeeks.org/red-black-tree-set-3-delete-2/ */
