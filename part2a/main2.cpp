@@ -97,8 +97,14 @@ int main()
 		//Delete from Red-Black Tree	
 		auto rbt_del_start = high_resolution_clock::now();
 		for( int a=0; a<D; a++) {
-			unsigned long long int b = (rand() % M);	
+            //0 and a million
+            unsigned long long int b = (rand() % M);
+            while(test_array[b] == 0){
+                b = (rand() % M);
+            }
 			rbtree.deleteByVal(test_array[b]);
+            test_array[b] = 0;
+            
 		}
 		auto rbt_del_stop = high_resolution_clock::now();
 		auto rbt_del_duration = duration_cast<microseconds>(rbt_del_stop - rbt_del_start);
